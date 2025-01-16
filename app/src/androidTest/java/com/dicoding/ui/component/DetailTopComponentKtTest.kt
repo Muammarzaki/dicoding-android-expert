@@ -2,7 +2,6 @@ package com.dicoding.ui.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
@@ -46,7 +45,7 @@ class DetailTopComponentKtTest {
                 imageUrl = url,
                 title = title,
                 artis = artis,
-                year = year,
+                time = year.toString(),
                 aspectRation = aspectRatio
             )
         }
@@ -90,7 +89,7 @@ class DetailTopComponentKtTest {
                 substring = true
             )
         ).assertIsDisplayed()
-        composeTestRule.onNodeWithTag("AuthorText").assertTextContains(artis,substring = true)
+        composeTestRule.onNodeWithTag("AuthorText").assertTextContains(artis, substring = true)
     }
 
     @Test
@@ -101,6 +100,7 @@ class DetailTopComponentKtTest {
                 substring = true
             )
         ).assertIsDisplayed()
-        composeTestRule.onNodeWithTag("YearText").assertTextContains(year.toString(),substring = true)
+        composeTestRule.onNodeWithTag("YearText")
+            .assertTextContains(year.toString(), substring = true)
     }
 }

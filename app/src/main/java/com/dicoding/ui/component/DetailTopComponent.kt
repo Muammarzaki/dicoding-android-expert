@@ -10,6 +10,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -28,7 +32,7 @@ fun TitleAuthorAndYear(
     style: TextStyle = LocalTextStyle.current,
     fontWeight: FontWeight? = null,
     artis: String,
-    year: Int,
+    time: String,
     title: String,
 ) {
     Column(modifier = modifier) {
@@ -48,7 +52,7 @@ fun TitleAuthorAndYear(
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = "Year: $year",
+                text = "Year: $time",
                 style = style,
                 fontWeight = fontWeight,
                 modifier = Modifier.testTag("YearText"),
@@ -63,8 +67,9 @@ fun DetailTop(
     imageUrl: String,
     title: String,
     artis: String,
-    year: Int,
-    aspectRation: Float
+    time: String,
+    aspectRation: Float,
+    shape: Shape = RectangleShape
 ) {
     Column(modifier = modifier) {
         AsyncImage(
@@ -72,16 +77,19 @@ fun DetailTop(
             placeholder = painterResource(R.drawable.placeholder_image),
             error = painterResource(R.drawable.placeholder_image),
             contentDescription = stringResource(R.string.art_image),
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .aspectRatio(aspectRation)
+                .clip(shape)
                 .testTag("AsyncImage")
         )
+        Spacer(Modifier.height(16.dp))
         TitleAuthorAndYear(
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Medium,
             title = title,
             artis = artis,
-            year = year,
+            time = time,
         )
     }
 }
@@ -96,8 +104,8 @@ private fun DetailTopPreview() {
             imageUrl = "https://awsimages.detik.net.id/community/media/visual/2018/03/01/7c6217e5-b9eb-4ac8-88a0-26f097e6506c.jpeg?w=600&q=90",
             title = "Chocolate Starfish and the Hot Dog Flavored Water",
             artis = "Pablo Picasso",
-            year = 2023,
-            aspectRation = 4f / 3f
+            time = 2023.toString(),
+            aspectRation = 4f / 3f,
         )
     }
 }
