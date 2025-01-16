@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="should_load_image_from_url_and_have_some_content_description()">
+      <SelectionState runConfigName="DetailTopComponentKtTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="should_have_title_artis_year_with_same_value_as_provided()">
+      <SelectionState runConfigName="testYearShowTheYear()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="ArtCardComponentKtTest">
+      <SelectionState runConfigName="test_has_same_field_with_pair_list()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="root_should_not_clickable()">
+      <SelectionState runConfigName="DetailScreenPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="root_should_has_4_child()">
+      <SelectionState runConfigName="DetailTopPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

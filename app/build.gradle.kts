@@ -1,5 +1,13 @@
 @file:Suppress("UnstableApiUsage")
 
+import java.util.Properties
+
+val localProperties: Properties by lazy {
+    Properties().also {
+        it.load(project.rootProject.file("local.properties").inputStream())
+    }
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -24,6 +32,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField(
+            "String",
+            "IAC_BASE_URL",
+            "\"${localProperties.getProperty("iac.base_url")}\""
+        )
     }
 
     buildTypes {
@@ -54,7 +67,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE*}"
         }
     }
-    testOptions{
+    testOptions {
         unitTests {
             isIncludeAndroidResources = true
         }
@@ -64,6 +77,7 @@ android {
 dependencies {
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.androidx.webkit)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.hilt.android)
@@ -88,4 +102,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(kotlin("reflect"))
 }
