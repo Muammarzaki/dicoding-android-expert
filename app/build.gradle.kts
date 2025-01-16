@@ -75,6 +75,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.navigation.compose)
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.webkit)
