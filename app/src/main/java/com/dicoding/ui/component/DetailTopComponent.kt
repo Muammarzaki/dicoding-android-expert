@@ -81,7 +81,7 @@ fun DetailTop(
             modifier = Modifier
                 .aspectRatio(aspectRation)
                 .clip(shape)
-                .testTag("AsyncImage")
+                .testTag("ArtThumbnail")
         )
         Spacer(Modifier.height(16.dp))
         TitleAuthorAndYear(

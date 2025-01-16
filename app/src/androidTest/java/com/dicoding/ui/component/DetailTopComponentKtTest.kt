@@ -24,7 +24,7 @@ import org.junit.Test
 class DetailTopComponentKtTest {
     @get:Rule
     val composeTestRule = createComposeRule()
-    val context = InstrumentationRegistry.getInstrumentation().targetContext
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
 
     private val url =
         "https://awsimages.detik.net.id/community/media/visual/2018/03/01/7c6217e5-b9eb-4ac8-88a0-26f097e6506c.jpeg?w=600&q=90"
@@ -58,7 +58,7 @@ class DetailTopComponentKtTest {
 
     @Test
     fun testDetailTop() {
-        composeTestRule.onNodeWithTag("AsyncImage").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("ArtThumbnail").assertIsDisplayed()
         composeTestRule.onNodeWithTag("TitleText").assertIsDisplayed()
         composeTestRule.onNodeWithTag("AuthorText").assertIsDisplayed()
         composeTestRule.onNodeWithTag("YearText").assertIsDisplayed()
@@ -72,7 +72,7 @@ class DetailTopComponentKtTest {
 
     @Test
     fun testImageShowTheImage() {
-        composeTestRule.onNodeWithTag("AsyncImage").captureToImage()
+        composeTestRule.onNodeWithTag("ArtThumbnail").captureToImage()
     }
 
     @Test

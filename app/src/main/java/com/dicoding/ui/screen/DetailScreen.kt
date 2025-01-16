@@ -23,6 +23,14 @@ import com.dicoding.ui.theme.ColArtsTheme
 
 @Composable
 fun DetailScreen(modifier: Modifier = Modifier, details: Artwork) {
+    DetailContent(modifier, details)
+}
+
+@Composable
+private fun DetailContent(
+    modifier: Modifier = Modifier,
+    details: Artwork
+) {
     val scrollState = rememberScrollState()
     Scaffold(modifier = modifier.padding(16.dp)) { contentPadding ->
         Column(
@@ -79,7 +87,7 @@ fun DetailScreen(modifier: Modifier = Modifier, details: Artwork) {
 @Composable
 private fun DetailScreenPreview() {
     ColArtsTheme {
-        DetailScreen(
+        DetailContent(
             details = Artwork(
                 id = 1,
                 title = "Chocolate Starfish and the Hot Dog Flavored Water",
