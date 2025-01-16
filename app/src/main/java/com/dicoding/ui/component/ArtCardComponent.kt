@@ -15,8 +15,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -31,10 +34,11 @@ fun ArtCard(
     artis: String,
     year: String,
     contentDescription: String = stringResource(R.string.art_image),
+    titleStyle: TextStyle = MaterialTheme.typography.titleLarge,
 ) {
     Column(
         modifier = modifier
-            .padding(16.dp)
+            .padding(8.dp)
     ) {
         AsyncImage(
             model = imageUrl,
@@ -42,7 +46,7 @@ fun ArtCard(
             placeholder = painterResource(id = R.drawable.placeholder_image),
             error = painterResource(id = R.drawable.placeholder_image),
             modifier = Modifier
-                .testTag("AsyncImage")
+                .testTag("ArtThumbnail")
                 .aspectRatio(5f / 4f)
                 .clip(MaterialTheme.shapes.medium)
                 .fillMaxWidth()
@@ -52,7 +56,7 @@ fun ArtCard(
                 .testTag("TitleText")
                 .padding(top = 12.dp),
             text = title,
-            style = MaterialTheme.typography.titleLarge,
+            style = titleStyle,
             fontWeight = FontWeight.Bold
         )
         Row(
@@ -62,14 +66,21 @@ fun ArtCard(
                 .fillMaxWidth()
         ) {
             Text(
-                modifier = Modifier.testTag("AuthorText"),
+                modifier = Modifier
+                    .testTag("AuthorText")
+                    .weight(3f),
                 text = artis,
                 fontWeight = FontWeight.Normal,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
             )
             Text(
-                modifier = Modifier.testTag("YearText"),
+                modifier = Modifier
+                    .testTag("YearText")
+                    .weight(1.4f),
                 text = year,
+                textAlign = TextAlign.End,
                 fontWeight = FontWeight.Normal,
                 style = MaterialTheme.typography.bodyLarge,
                 fontStyle = FontStyle.Italic,
@@ -89,6 +100,7 @@ private fun ArtCardPreview() {
                 artis = "Pablo Picasso",
                 year = 2023.toString(),
                 contentDescription = stringResource(R.string.art_image),
+                titleStyle = MaterialTheme.typography.titleLarge,
             )
         }
     }

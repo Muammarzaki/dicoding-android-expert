@@ -1,5 +1,6 @@
 package com.dicoding.ui.component
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.assertContentDescriptionEquals
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertHasNoClickAction
@@ -9,7 +10,6 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.printToLog
 import com.dicoding.ui.theme.ColArtsTheme
 import org.junit.Before
 import org.junit.Rule
@@ -41,6 +41,7 @@ class ArtCardComponentKtTest {
                     artis = artis,
                     year = year,
                     contentDescription = description,
+                    titleStyle = MaterialTheme.typography.titleLarge,
                 )
             }
         }
@@ -48,7 +49,7 @@ class ArtCardComponentKtTest {
 
     @Test
     fun should_load_image_from_url_and_have_some_content_description() {
-        composeTestRule.onNodeWithTag("AsyncImage")
+        composeTestRule.onNodeWithTag("ArtThumbnail")
             .assertExists()
             .assertIsDisplayed()
             .assertContentDescriptionEquals(description)
