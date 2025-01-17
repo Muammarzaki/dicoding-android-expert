@@ -1,20 +1,27 @@
 package com.dicoding.ui.screen
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dicoding.domain.Artwork
+import com.dicoding.presenter.viewmodel.DetailViewModel
 import com.dicoding.toPropertyList
 import com.dicoding.ui.component.DetailInfoTable
 import com.dicoding.ui.component.DetailTop
@@ -22,8 +29,19 @@ import com.dicoding.ui.component.TextHtml
 import com.dicoding.ui.theme.ColArtsTheme
 
 @Composable
-fun DetailScreen(modifier: Modifier = Modifier, details: Artwork) {
-    DetailContent(modifier, details)
+fun DetailScreen(modifier: Modifier = Modifier, viewModel: DetailViewModel) {
+    val details by viewModel.art.collectAsState()
+    details?.let {
+        DetailContent(modifier, it)
+    } ?: Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator(
+            color = MaterialTheme.colorScheme.secondary,
+            trackColor = MaterialTheme.colorScheme.surfaceVariant
+        )
+    }
 }
 
 @Composable

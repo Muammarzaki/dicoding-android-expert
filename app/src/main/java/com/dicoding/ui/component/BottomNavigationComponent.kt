@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.dicoding.presenter.Screen
 import com.dicoding.ui.theme.ColArtsTheme
@@ -24,6 +25,9 @@ data class NavigationItem(
 
 @Composable
 fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
+
+    val backStackEntry = navController.currentBackStackEntryAsState()
+    val currentRoute = backStackEntry.value?.destination?.route
     NavigationBar(
         modifier = modifier
     ) {
@@ -40,7 +44,9 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
             ),
         )
         navigationItems.map {
+            val selected = currentRoute == it.screen.route
             NavigationBarItem(
+                selected = selected,
                 icon = {
                     Icon(
                         imageVector = it.icon,
@@ -48,13 +54,14 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
                     )
                 },
                 label = {
-                    Text(it.title)
+                    if (selected)
+                        Text(it.title)
                 },
-                selected = false,
                 onClick = {
                     navController.navigate(it.screen.route) {
                         popUpTo(navController.graph.startDestinationId) {
-                            saveState = true
+                            saveState = false
+                            inclusive = true
                         }
                         restoreState = true
                         launchSingleTop = true

@@ -1,5 +1,6 @@
 package com.dicoding.ui.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,6 +39,7 @@ fun ArtCard(
 ) {
     Column(
         modifier = modifier
+            .background(MaterialTheme.colorScheme.surface)
             .padding(8.dp)
     ) {
         AsyncImage(
@@ -51,40 +53,44 @@ fun ArtCard(
                 .clip(MaterialTheme.shapes.medium)
                 .fillMaxWidth()
         )
-        Text(
-            modifier = Modifier
-                .testTag("TitleText")
-                .padding(top = 12.dp),
-            text = title,
-            style = titleStyle,
-            fontWeight = FontWeight.Bold
-        )
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .padding(top = 5.dp)
-                .fillMaxWidth()
-        ) {
-            Text(
-                modifier = Modifier
-                    .testTag("AuthorText")
-                    .weight(3f),
-                text = artis,
-                fontWeight = FontWeight.Normal,
-                style = MaterialTheme.typography.bodyMedium,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Text(
-                modifier = Modifier
-                    .testTag("YearText")
-                    .weight(1.4f),
-                text = year,
-                textAlign = TextAlign.End,
-                fontWeight = FontWeight.Normal,
-                style = MaterialTheme.typography.bodyLarge,
-                fontStyle = FontStyle.Italic,
-            )
+        Surface {
+            Column {
+                Text(
+                    modifier = Modifier
+                        .testTag("TitleText")
+                        .padding(top = 12.dp),
+                    text = title,
+                    style = titleStyle,
+                    fontWeight = FontWeight.Bold
+                )
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .padding(top = 5.dp)
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .testTag("AuthorText")
+                            .weight(3f),
+                        text = artis,
+                        fontWeight = FontWeight.Normal,
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                    Text(
+                        modifier = Modifier
+                            .testTag("YearText")
+                            .weight(1.4f),
+                        text = year,
+                        textAlign = TextAlign.End,
+                        fontWeight = FontWeight.Normal,
+                        style = MaterialTheme.typography.bodyLarge,
+                        fontStyle = FontStyle.Italic,
+                    )
+                }
+            }
         }
     }
 }
