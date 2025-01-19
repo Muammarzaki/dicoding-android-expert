@@ -23,7 +23,3 @@ fun String.toTitleCase(): String {
     return split(Regex("(?=[A-Z])|_"))
         .joinToString(" ") { word -> word.lowercase().replaceFirstChar { it.uppercase() } }
 }
-
-@Target(AnnotationTarget.FIELD)
-@Retention(AnnotationRetention.RUNTIME)
-annotation class PropertyNotIncluding

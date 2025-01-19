@@ -15,6 +15,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("androidx.room")
 }
 
 android {
@@ -42,10 +43,6 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
     }
     compileOptions {
@@ -72,12 +69,20 @@ android {
             isIncludeAndroidResources = true
         }
     }
+    dynamicFeatures += setOf(":favorite")
 }
 
 dependencies {
+
     implementation(libs.androidx.navigation.compose)
     ksp(libs.androidx.room.compiler)
     ksp(libs.hilt.android.compiler)
+    implementation(libs.okhttp)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.room.runtime)
+    implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.androidx.webkit)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
@@ -103,5 +108,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(kotlin("reflect"))
+    implementation(libs.kotlin.reflect)
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }

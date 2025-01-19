@@ -1,16 +1,28 @@
 package com.dicoding.ui.component
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
@@ -34,6 +46,8 @@ fun TitleAuthorAndYear(
     artis: String,
     time: String,
     title: String,
+    onFavoriteClick: () -> Unit,
+    isFavorite: Boolean = false
 ) {
     Column(modifier = modifier) {
         Text(
@@ -42,21 +56,52 @@ fun TitleAuthorAndYear(
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.testTag("TitleText"),
         )
-        Spacer(Modifier.height(16.dp))
-        Column {
-            Text(
-                text = "Artis: $artis",
-                style = style,
-                fontWeight = fontWeight,
-                modifier = Modifier.testTag("AuthorText"),
-            )
-            Spacer(Modifier.height(4.dp))
-            Text(
-                text = "Year: $time",
-                style = style,
-                fontWeight = fontWeight,
-                modifier = Modifier.testTag("YearText"),
-            )
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .padding(top = 5.dp)
+                .fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.weight(4f)) {
+                Text(
+                    text = "Artis: $artis",
+                    style = style,
+                    fontWeight = fontWeight,
+                    modifier = Modifier.testTag("AuthorText"),
+                )
+                Spacer(Modifier.height(4.dp))
+                Text(
+                    text = "Year: $time",
+                    style = style,
+                    fontWeight = fontWeight,
+                    modifier = Modifier.testTag("YearText"),
+                )
+            }
+
+            Column(
+                modifier =
+                Modifier.weight(0.9f)
+            ) {
+                IconButton(
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .size(50.dp),
+                    colors = IconButtonColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        disabledContainerColor = Color.LightGray,
+                        disabledContentColor = Color.Gray,
+                    ),
+                    onClick = onFavoriteClick
+                ) {
+                    Icon(
+                        imageVector = if (!isFavorite) Icons.Outlined.FavoriteBorder else Icons.Outlined.Favorite,
+                        contentDescription = stringResource(R.string.favorite_button),
+                        tint = Color.Red
+                    )
+                }
+            }
         }
     }
 }
@@ -69,7 +114,9 @@ fun DetailTop(
     artis: String,
     time: String,
     aspectRation: Float,
-    shape: Shape = RectangleShape
+    shape: Shape = RectangleShape,
+    isFavorite: Boolean = false,
+    onFavoriteClick: () -> Unit,
 ) {
     Column(modifier = modifier) {
         AsyncImage(
@@ -77,26 +124,28 @@ fun DetailTop(
             placeholder = painterResource(R.drawable.placeholder_image),
             error = painterResource(R.drawable.placeholder_image),
             contentDescription = stringResource(R.string.art_image),
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.FillHeight,
             modifier = Modifier
                 .aspectRatio(aspectRation)
                 .clip(shape)
                 .testTag("ArtThumbnail")
         )
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(24.dp))
         TitleAuthorAndYear(
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Medium,
-            title = title,
             artis = artis,
             time = time,
+            title = title,
+            onFavoriteClick = onFavoriteClick,
+            isFavorite = isFavorite
         )
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true)
 @Composable
-private fun DetailTopPreview() {
+private fun DetailTopPreviewUnFavorite() {
 
     ColArtsTheme {
         DetailTop(
@@ -106,6 +155,25 @@ private fun DetailTopPreview() {
             artis = "Pablo Picasso",
             time = 2023.toString(),
             aspectRation = 4f / 3f,
+            onFavoriteClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun DetailTopPreviewFavorite() {
+
+    ColArtsTheme {
+        DetailTop(
+            modifier = Modifier.padding(16.dp),
+            imageUrl = "https://awsimages.detik.net.id/community/media/visual/2018/03/01/7c6217e5-b9eb-4ac8-88a0-26f097e6506c.jpeg?w=600&q=90",
+            title = "Chocolate Starfish and the Hot Dog Flavored Water",
+            artis = "Pablo Picasso",
+            time = 2023.toString(),
+            aspectRation = 4f / 3f,
+            isFavorite = true,
+            onFavoriteClick = {}
         )
     }
 }

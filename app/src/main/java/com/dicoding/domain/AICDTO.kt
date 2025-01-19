@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package com.dicoding.domain
 
 import android.os.Parcelable
@@ -5,19 +7,25 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class AICResponse(
+data class AICArtWorksResponse(
 
     @field:SerializedName("pagination")
-    val pagination: Pagination? = null,
+    val pagination: Pagination,
 
     @field:SerializedName("data")
-    val data: List<DataItem?>? = null,
+    val data: List<DataItem> = emptyList(),
 
     @field:SerializedName("config")
     val config: Config? = null,
 
     @field:SerializedName("info")
     val info: Info? = null
+) : Parcelable
+
+@Parcelize
+data class AICArtWorkResponse(
+    @field:SerializedName("data")
+    val data: DataItem? = null,
 ) : Parcelable
 
 @Parcelize
@@ -67,7 +75,7 @@ data class DataItem(
     val termTitles: List<String?>? = null,
 
     @field:SerializedName("id")
-    val id: Int? = null,
+    val id: String,
 
     @field:SerializedName("main_reference_number")
     val mainReferenceNumber: String? = null,
@@ -127,7 +135,7 @@ data class DataItem(
     val sourceUpdatedAt: String? = null,
 
     @field:SerializedName("on_loan_display")
-    val onLoanDisplay: Double? = null,
+    val onLoanDisplay: String? = null,
 
     @field:SerializedName("exhibition_history")
     val exhibitionHistory: String? = null,
@@ -175,7 +183,7 @@ data class DataItem(
     val hasEducationalResources: Boolean? = null,
 
     @field:SerializedName("alt_titles")
-    val altTitles: String? = null,
+    val altTitles: List<String> = emptyList(),
 
     @field:SerializedName("gallery_title")
     val galleryTitle: String? = null,
@@ -280,7 +288,7 @@ data class DataItem(
     val hasMultimediaResources: Boolean? = null,
 
     @field:SerializedName("image_id")
-    val imageId: String? = null,
+    val imageId: String,
 
     @field:SerializedName("subject_id")
     val subjectId: String? = null,
@@ -289,7 +297,7 @@ data class DataItem(
     val mediumDisplay: String? = null,
 
     @field:SerializedName("colorfulness")
-    val colorfulness: Int? = null,
+    val colorfulness: Float? = null,
 
     @field:SerializedName("color")
     val color: Color? = null,
@@ -310,7 +318,7 @@ data class DataItem(
     val techniqueIds: List<String?>? = null,
 
     @field:SerializedName("title")
-    val title: String? = null,
+    val title: String,
 
     @field:SerializedName("department_title")
     val departmentTitle: String? = null,
@@ -398,10 +406,10 @@ data class Pagination(
     val nextUrl: String? = null,
 
     @field:SerializedName("total_pages")
-    val totalPages: Int? = null,
+    val totalPages: Int ,
 
     @field:SerializedName("current_page")
-    val currentPage: Int? = null
+    val currentPage: Int,
 ) : Parcelable
 
 @Parcelize
@@ -412,7 +420,7 @@ data class Contexts(
 ) : Parcelable
 
 @Parcelize
-data class Config(
+data class Config @JvmOverloads constructor(
 
     @field:SerializedName("website_url")
     val websiteUrl: String? = null,

@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
@@ -11,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -24,25 +26,19 @@ data class NavigationItem(
 )
 
 @Composable
-fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
+fun BottomBar(
+    modifier: Modifier = Modifier, navController: NavController,
+    navigationItems: List<NavigationItem>
+) {
 
     val backStackEntry = navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry.value?.destination?.route
     NavigationBar(
-        modifier = modifier
+        modifier = modifier,
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
+        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        tonalElevation = 0.dp
     ) {
-        val navigationItems = listOf(
-            NavigationItem(
-                title = "Home",
-                icon = Icons.Outlined.Home,
-                screen = Screen.Main
-            ),
-            NavigationItem(
-                title = "Profile",
-                icon = Icons.Outlined.FavoriteBorder,
-                screen = Screen.Favorite
-            ),
-        )
         navigationItems.map {
             val selected = currentRoute == it.screen.route
             NavigationBarItem(
@@ -77,7 +73,19 @@ fun BottomBar(modifier: Modifier = Modifier, navController: NavController) {
 private fun BottomBarPreview() {
     ColArtsTheme {
         BottomBar(
-            navController = rememberNavController()
+            navController = rememberNavController(),
+            navigationItems = listOf(
+                NavigationItem(
+                    title = "Home",
+                    icon = Icons.Outlined.Home,
+                    screen = Screen.Main
+                ),
+                NavigationItem(
+                    title = "Favorite",
+                    icon = Icons.Outlined.FavoriteBorder,
+                    screen = Screen.Favorite
+                ),
+            )
         )
     }
 }

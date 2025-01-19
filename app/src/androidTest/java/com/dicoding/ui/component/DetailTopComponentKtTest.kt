@@ -46,7 +46,7 @@ class DetailTopComponentKtTest {
                 title = title,
                 artis = artis,
                 time = year.toString(),
-                aspectRation = aspectRatio
+                aspectRation = aspectRatio,
             )
         }
     }

@@ -3,7 +3,7 @@ package com.dicoding.ui.component
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
-import com.dicoding.domain.Artwork
+import com.dicoding.domain.ArtWork
 import com.dicoding.toPropertyList
 import com.dicoding.ui.theme.ColArtsTheme
 import org.junit.Before
@@ -15,7 +15,7 @@ class DetailInfoComponentKtTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val pairList = Artwork(
+    private val pairList = ArtWork(
         id = 1,
         title = "Title",
         altTitles = null,

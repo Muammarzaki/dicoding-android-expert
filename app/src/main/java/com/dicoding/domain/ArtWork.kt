@@ -1,10 +1,7 @@
 package com.dicoding.domain
 
-import com.dicoding.PropertyNotIncluding
-
-data class Artwork(
-    @PropertyNotIncluding
-    val id: Int,
+data class ArtWork(
+    val id: String,
     val title: String,
     val altTitles: List<String>?,
     val thumbnail: String?,
@@ -14,10 +11,10 @@ data class Artwork(
     val dimensions: String?,
     val mediumDisplay: String?,
     val artworkTypeTitle: String?,
-    val isOnView: Boolean,
+    val isOnView: Boolean?,
     val galleryTitle: String?,
     val onLoanDisplay: String?,
-    val isPublicDomain: Boolean,
+    val isPublicDomain: Boolean?,
     val copyrightNotice: String?,
     val inscriptions: String?,
     val provenanceText: String?,
@@ -28,5 +25,36 @@ data class Artwork(
     val longitude: Double?,
     val description: String?,
 ) {
+    companion object {
+        fun parse(data: DataItem): ArtWork {
+            return with(data) {
+                ArtWork(
+                    id = id,
+                    title = title,
+                    altTitles = altTitles,
+                    thumbnail = id.toString(),
+                    artistDisplay = artistTitle,
+                    dateDisplay = dateDisplay,
+                    placeOfOrigin = placeOfOrigin,
+                    dimensions = dimensions,
+                    mediumDisplay = mediumDisplay,
+                    artworkTypeTitle = artworkTypeTitle,
+                    isOnView = isOnView,
+                    galleryTitle = galleryTitle,
+                    onLoanDisplay = onLoanDisplay,
+                    isPublicDomain = isPublicDomain,
+                    copyrightNotice = copyrightNotice,
+                    inscriptions = inscriptions,
+                    provenanceText = provenanceText,
+                    publicationHistory = publicationHistory,
+                    exhibitionHistory = exhibitionHistory,
+                    colorfulness = colorfulness,
+                    latitude = latitude,
+                    longitude = longitude,
+                    description = description,
+                )
+            }
+        }
+    }
 }
 

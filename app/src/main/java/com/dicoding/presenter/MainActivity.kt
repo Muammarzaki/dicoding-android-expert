@@ -2,16 +2,19 @@ package com.dicoding.presenter
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.dicoding.presenter.viewmodel.MainViewModel
 import com.dicoding.ui.component.BottomBar
+import com.dicoding.ui.component.NavigationItem
 import com.dicoding.ui.screen.navigation.MainAndFavoriteNavigationStack
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +28,21 @@ class MainActivity : ComponentActivity() {
             Surface {
                 Scaffold(
                     bottomBar = {
-                        BottomBar(navController = navController)
+                        BottomBar(
+                            navController = navController,
+                            navigationItems = listOf(
+                                NavigationItem(
+                                    title = "Home",
+                                    icon = Icons.Outlined.Home,
+                                    screen = Screen.Main
+                                ),
+                                NavigationItem(
+                                    title = "Favorite",
+                                    icon = Icons.Outlined.FavoriteBorder,
+                                    screen = Screen.Favorite
+                                ),
+                            )
+                        )
                     }
                 ) { paddingValues ->
                     MainAndFavoriteNavigationStack(

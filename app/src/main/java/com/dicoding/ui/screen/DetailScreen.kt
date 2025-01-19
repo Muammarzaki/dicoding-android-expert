@@ -8,19 +8,32 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dicoding.domain.Artwork
+import com.dicoding.R
+import com.dicoding.domain.ArtWork
 import com.dicoding.presenter.viewmodel.DetailViewModel
 import com.dicoding.toPropertyList
 import com.dicoding.ui.component.DetailInfoTable
@@ -29,12 +42,27 @@ import com.dicoding.ui.component.TextHtml
 import com.dicoding.ui.theme.ColArtsTheme
 
 @Composable
-fun DetailScreen(modifier: Modifier = Modifier, viewModel: DetailViewModel) {
+fun DetailScreen(
+    modifier: Modifier = Modifier,
+    viewModel: DetailViewModel,
+    onBackClick: () -> Unit,
+) {
     val details by viewModel.art.collectAsState()
+    val isFavorite by viewModel.isFavorite.collectAsState()
+
     details?.let {
-        DetailContent(modifier, it)
+        DetailContent(
+            modifier.padding(horizontal = 16.dp),
+            it,
+            onBackClick,
+            isFavorite = isFavorite,
+            onFavoriteClick = {
+                viewModel.toggleFavorite(it.id.toString())
+            }
+        )
     } ?: Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(
@@ -44,26 +72,57 @@ fun DetailScreen(modifier: Modifier = Modifier, viewModel: DetailViewModel) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DetailContent(
     modifier: Modifier = Modifier,
-    details: Artwork
+    details: ArtWork,
+    onBackClick: () -> Unit = {},
+    isFavorite: Boolean = false,
+    onFavoriteClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
-    Scaffold(modifier = modifier.padding(16.dp)) { contentPadding ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                    actionIconContentColor = MaterialTheme.colorScheme.onPrimary,
+                    scrolledContainerColor = MaterialTheme.colorScheme.primary,
+                ),
+                title = {
+                    Text(
+                        text = "Detail Art", fontWeight = FontWeight.SemiBold
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                            contentDescription = stringResource(R.string.back_button)
+                        )
+                    }
+                }
+            )
+        }
+    ) { contentPadding ->
         Column(
             modifier = modifier
                 .padding(contentPadding)
                 .verticalScroll(state = scrollState)
         ) {
             DetailTop(
-                modifier = Modifier,
+                modifier = Modifier.padding(top = 12.dp),
                 title = details.title,
                 artis = details.artistDisplay ?: "Unknown",
                 time = details.dateDisplay ?: "--",
                 aspectRation = 4f / 3f,
                 imageUrl = details.thumbnail ?: "",
-                shape = MaterialTheme.shapes.medium
+                shape = MaterialTheme.shapes.medium,
+                isFavorite = isFavorite,
+                onFavoriteClick = onFavoriteClick
             )
             details.description?.let {
                 if (it.isNotEmpty()) {
@@ -106,8 +165,9 @@ private fun DetailContent(
 private fun DetailScreenPreview() {
     ColArtsTheme {
         DetailContent(
-            details = Artwork(
-                id = 1,
+            modifier = Modifier.padding(horizontal = 16.dp),
+            details = ArtWork(
+                id = "1",
                 title = "Chocolate Starfish and the Hot Dog Flavored Water",
                 altTitles = listOf(
                     "El Guernica, La Guernica",
@@ -133,7 +193,7 @@ private fun DetailScreenPreview() {
                 latitude = 40.4093, // Latitude for Madrid
                 longitude = -3.7118, // Longitude for Madrid
                 description = "<p>In his best-known and largest painting, Georges Seurat depicted people from different social classes strolling and relaxing in a park just west of Paris on La Grande Jatte, an island in the Seine River. Although he took his subject from modern life, Seurat sought to evoke the sense of timelessness associated with ancient art, especially Egyptian and Greek sculpture. He once wrote, “I want to make modern people, in their essential traits, move about as they do on those friezes, and place them on canvases organized by harmonies of color.”</p>\n<p>Seurat painted <em>A Sunday on La Grande Jatte—1884</em> using pointillism, a highly systematic and scientific technique based on the hypothesis that closely positioned points of pure color mix together in the viewer’s eye. He began work on the canvas in 1884 (and included this date in the title) with a layer of small, horizontal brushstrokes in complementary colors. He next added a series of dots that coalesce into solid and luminous forms when seen from a distance. Sometime before 1889 Seurat added a border of blue, orange, and red dots that provide a visual transition between the painting’s interior and the specially designed white frame, <a href=\"https://www.artic.edu/articles/969/la-grande-jatte-frame-by-frame\">which has been re-created at the Art Institute</a>.</p>\n"
-            )
+            ), onFavoriteClick = {}
         )
     }
 }
