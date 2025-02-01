@@ -19,6 +19,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import com.dicoding.domain.ArtCard
+import com.dicoding.data.SimpleArt
 import com.dicoding.ui.theme.ColArtsTheme
 import kotlinx.coroutines.flow.flowOf
 

@@ -1,13 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import java.util.Properties
-
-val localProperties: Properties by lazy {
-    Properties().also {
-        it.load(project.rootProject.file("local.properties").inputStream())
-    }
-}
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -15,7 +7,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
-    id("androidx.room")
+
 }
 
 android {
@@ -33,11 +25,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        buildConfigField(
-            "String",
-            "IAC_BASE_URL",
-            "\"${localProperties.getProperty("iac.base_url")}\""
-        )
     }
 
     buildTypes {
@@ -73,30 +60,21 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.navigation.compose)
-    ksp(libs.androidx.room.compiler)
+    implementation(project(":core"))
     ksp(libs.hilt.android.compiler)
-    implementation(libs.okhttp)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.room.runtime)
-    implementation(libs.androidx.room.paging)
-    implementation(libs.androidx.paging.compose)
-    implementation(libs.androidx.paging.runtime.ktx)
-    implementation(libs.androidx.webkit)
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
     implementation(libs.hilt.android)
+
+    api(libs.androidx.core.ktx)
+    api(libs.androidx.lifecycle.runtime.ktx)
+    api(libs.androidx.activity.compose)
+    api(platform(libs.androidx.compose.bom))
+    api(libs.androidx.ui)
+    api(libs.androidx.ui.graphics)
+    api(libs.androidx.ui.tooling.preview)
+    api(libs.androidx.material3)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+
 
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
@@ -108,9 +86,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.kotlin.reflect)
-}
-
-room {
-    schemaDirectory("$projectDir/schemas")
+    debugImplementation(libs.leakcanary.android)
 }

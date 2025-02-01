@@ -20,12 +20,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -34,18 +30,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dicoding.R
 import com.dicoding.domain.ArtWork
-import com.dicoding.presenter.viewmodel.DetailViewModel
 import com.dicoding.toPropertyList
 import com.dicoding.ui.component.DetailInfoTable
 import com.dicoding.ui.component.DetailTop
 import com.dicoding.ui.component.TextHtml
 import com.dicoding.ui.theme.ColArtsTheme
+import com.dicoding.ui.viewmodel.MainViewModel
 
 @Composable
 fun DetailScreen(
     modifier: Modifier = Modifier,
-    viewModel: DetailViewModel,
+    viewModel: MainViewModel,
     onBackClick: () -> Unit,
+    onFavoriteClick: () -> Unit,
 ) {
     val details by viewModel.art.collectAsState()
     val isFavorite by viewModel.isFavorite.collectAsState()
@@ -56,9 +53,7 @@ fun DetailScreen(
             it,
             onBackClick,
             isFavorite = isFavorite,
-            onFavoriteClick = {
-                viewModel.toggleFavorite(it.id.toString())
-            }
+            onFavoriteClick = onFavoriteClick
         )
     } ?: Box(
         modifier = modifier

@@ -63,7 +63,7 @@ fun TitleAuthorAndYear(
                 .padding(top = 5.dp)
                 .fillMaxWidth()
         ) {
-            Column(modifier = Modifier.weight(4f)) {
+            Column(modifier = Modifier.weight(3.5f)) {
                 Text(
                     text = "Artis: $artis",
                     style = style,
@@ -80,12 +80,11 @@ fun TitleAuthorAndYear(
             }
 
             Column(
-                modifier =
-                Modifier.weight(0.9f)
+                modifier = Modifier.weight(0.9f),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 IconButton(
                     modifier = Modifier
-                        .padding(end = 16.dp)
                         .size(50.dp),
                     colors = IconButtonColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,

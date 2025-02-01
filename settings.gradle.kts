@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "ColArts"
 include(":app")
+include(":core")
+include(":favorite")
