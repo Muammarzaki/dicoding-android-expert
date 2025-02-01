@@ -1,4 +1,4 @@
-package com.dicoding.domain
+package com.dicoding.core.domain
 
 data class ArtCard(
     val id: String,

@@ -1,6 +1,6 @@
 package com.dicoding.favorite.di
 
-import com.dicoding.domain.IArtsUseCase
+import com.dicoding.core.domain.IArtsUseCase
 import com.dicoding.favorite.ui.viewmodel.FavoriteViewModel
 import dagger.Module
 import dagger.Provides

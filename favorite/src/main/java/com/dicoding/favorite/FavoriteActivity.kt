@@ -1,12 +1,11 @@
 package com.dicoding.favorite
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
-import com.dicoding.di.FavoriteModuleDependencies
+import com.dicoding.core.di.FavoriteModuleDependencies
 import com.dicoding.favorite.di.DaggerFavoriteComponent
 import com.dicoding.favorite.navigation.FavoriteNavigation
 import com.dicoding.favorite.ui.viewmodel.FavoriteViewModel

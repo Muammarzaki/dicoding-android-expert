@@ -1,4 +1,4 @@
-package com.dicoding.domain
+package com.dicoding.core.domain
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow

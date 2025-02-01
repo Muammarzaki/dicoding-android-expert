@@ -1,6 +1,6 @@
-package com.dicoding.di
+package com.dicoding.core.di
 
-import com.dicoding.domain.IArtsUseCase
+import com.dicoding.core.domain.IArtsUseCase
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent

@@ -17,7 +17,7 @@ plugins {
 }
 
 android {
-    namespace = "com.dicoding"
+    namespace = "com.dicoding.core"
     compileSdk = 35
 
     defaultConfig {

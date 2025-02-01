@@ -1,6 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
-package com.dicoding.data
+package com.dicoding.core.data
 
 import android.os.Parcelable
 import androidx.room.Entity

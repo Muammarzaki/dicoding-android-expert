@@ -1,7 +1,7 @@
 package com.dicoding.favorite.di
 
 import android.content.Context
-import com.dicoding.di.FavoriteModuleDependencies
+import com.dicoding.core.di.FavoriteModuleDependencies
 import com.dicoding.favorite.FavoriteActivity
 import dagger.BindsInstance
 import dagger.Component

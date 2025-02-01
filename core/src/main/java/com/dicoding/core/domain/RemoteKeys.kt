@@ -1,4 +1,4 @@
-package com.dicoding.domain
+package com.dicoding.core.domain
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

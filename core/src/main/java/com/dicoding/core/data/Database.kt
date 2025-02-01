@@ -1,4 +1,4 @@
-package com.dicoding.data
+package com.dicoding.core.data
 
 import androidx.paging.PagingSource
 import androidx.room.AutoMigration
@@ -8,9 +8,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.RoomDatabase
-import com.dicoding.data.SimpleArt
-import com.dicoding.data.SimpleFavoriteArt
-import com.dicoding.domain.RemoteKeys
+import com.dicoding.core.domain.RemoteKeys
 import kotlinx.coroutines.flow.Flow
 
 @Database(

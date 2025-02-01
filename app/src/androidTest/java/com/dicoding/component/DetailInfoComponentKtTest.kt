@@ -3,10 +3,8 @@ package com.dicoding.component
 import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithTag
-import com.dicoding.domain.ArtWork
-import com.dicoding.toPropertyList
-import com.dicoding.ui.component.DetailInfoTable
-import com.dicoding.ui.theme.ColArtsTheme
+import com.dicoding.core.domain.ArtWork
+import com.dicoding.core.toPropertyList
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

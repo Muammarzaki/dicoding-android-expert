@@ -1,4 +1,4 @@
-package com.dicoding.data
+package com.dicoding.core.data
 
 import android.util.Log
 import androidx.paging.ExperimentalPagingApi
@@ -6,9 +6,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.dicoding.domain.ArtCard
-import com.dicoding.domain.ArtWork
-import com.dicoding.domain.IAICRepository
+import com.dicoding.core.domain.ArtCard
+import com.dicoding.core.domain.ArtWork
+import com.dicoding.core.domain.IAICRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

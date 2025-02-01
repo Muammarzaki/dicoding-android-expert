@@ -1,14 +1,14 @@
-package com.dicoding.di
+package com.dicoding.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.dicoding.BuildConfig
-import com.dicoding.data.ArtWorkDao
-import com.dicoding.data.Database
-import com.dicoding.data.IAICEndpoint
-import com.dicoding.data.RemoteKeysDao
-import com.dicoding.domain.ArtsUseCase
-import com.dicoding.domain.IAICRepository
+import com.dicoding.core.BuildConfig
+import com.dicoding.core.data.ArtWorkDao
+import com.dicoding.core.data.Database
+import com.dicoding.core.data.IAICEndpoint
+import com.dicoding.core.data.RemoteKeysDao
+import com.dicoding.core.domain.ArtsUseCase
+import com.dicoding.core.domain.IAICRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -65,7 +65,7 @@ object CoreModule {
         return Room.databaseBuilder(
             applicationContext,
             Database::class.java,
-            applicationContext.packageName
+            "ColArt.db"
         ).openHelperFactory(
             SupportFactory(passPhase)
         ).build()

@@ -5,8 +5,8 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.dicoding.domain.ArtWork
-import com.dicoding.domain.IArtsUseCase
+import com.dicoding.core.domain.ArtWork
+import com.dicoding.core.domain.IArtsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

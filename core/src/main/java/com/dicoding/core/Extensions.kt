@@ -1,4 +1,4 @@
-package com.dicoding
+package com.dicoding.core
 
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.isAccessible

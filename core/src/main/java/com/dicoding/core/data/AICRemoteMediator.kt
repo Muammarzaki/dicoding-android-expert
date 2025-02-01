@@ -1,12 +1,11 @@
-package com.dicoding.data
+package com.dicoding.core.data
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.dicoding.data.SimpleArt
-import com.dicoding.domain.RemoteKeys
+import com.dicoding.core.domain.RemoteKeys
 
 @OptIn(ExperimentalPagingApi::class)
 class AICRemoteMediator(

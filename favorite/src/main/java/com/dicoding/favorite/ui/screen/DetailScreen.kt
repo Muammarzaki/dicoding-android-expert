@@ -29,9 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dicoding.R
-import com.dicoding.domain.ArtWork
+import com.dicoding.core.domain.ArtWork
 import com.dicoding.favorite.ui.viewmodel.FavoriteViewModel
-import com.dicoding.toPropertyList
+import com.dicoding.core.toPropertyList
 import com.dicoding.ui.component.DetailInfoTable
 import com.dicoding.ui.component.DetailTop
 import com.dicoding.ui.component.TextHtml

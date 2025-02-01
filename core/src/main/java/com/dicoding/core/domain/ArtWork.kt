@@ -1,6 +1,6 @@
-package com.dicoding.domain
+package com.dicoding.core.domain
 
-import com.dicoding.data.DataItem
+import com.dicoding.core.data.DataItem
 
 data class ArtWork(
     val id: String,

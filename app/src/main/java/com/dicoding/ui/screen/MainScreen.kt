@@ -24,8 +24,7 @@ import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.dicoding.R
-import com.dicoding.domain.ArtCard
-import com.dicoding.data.SimpleArt
+import com.dicoding.core.domain.ArtCard
 import com.dicoding.ui.component.ArtCardVerticalStaggeredCard
 import com.dicoding.ui.theme.ColArtsTheme
 import com.dicoding.ui.viewmodel.MainViewModel
