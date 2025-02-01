@@ -3,19 +3,20 @@ package com.dicoding.di
 import android.content.Context
 import androidx.room.Room
 import com.dicoding.BuildConfig
-import com.dicoding.data.AICRepository
 import com.dicoding.data.ArtWorkDao
 import com.dicoding.data.Database
 import com.dicoding.data.IAICEndpoint
 import com.dicoding.data.RemoteKeysDao
 import com.dicoding.domain.ArtsUseCase
 import com.dicoding.domain.IAICRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -24,12 +25,21 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
- object CoreModule {
+object CoreModule {
+
+    private fun provideCertificatePinning(): CertificatePinner {
+        @Suppress("SpellCheckingInspection")
+        return CertificatePinner.Builder()
+            .add("artic.edu", "sha256/30Da9/6LeLRQmIEAuVQfsVp2TRAJNrMH4hzW/vwC4Js=")
+            .build()
+    }
+
     private fun provideClientConfig(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().also {
                 it.level = HttpLoggingInterceptor.Level.BODY
             })
+            .certificatePinner(provideCertificatePinning())
             .build()
     }
 
@@ -50,12 +60,16 @@ import javax.inject.Singleton
 
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext applicationContext: Context): Database =
-        Room.databaseBuilder(
+    fun provideDatabase(@ApplicationContext applicationContext: Context): Database {
+        val passPhase = SQLiteDatabase.getBytes("arts".toCharArray())
+        return Room.databaseBuilder(
             applicationContext,
             Database::class.java,
             applicationContext.packageName
+        ).openHelperFactory(
+            SupportFactory(passPhase)
         ).build()
+    }
 
     @Provides
     @Singleton

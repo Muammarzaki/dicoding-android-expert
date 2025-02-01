@@ -38,6 +38,13 @@ android {
     }
     buildTypes {
         release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -71,6 +78,10 @@ dependencies {
     implementation(libs.hilt.android)
 
     api(libs.kotlin.reflect)
+
+    api(libs.androidx.security.crypto)
+    implementation(libs.android.database.sqlcipher)
+    implementation(libs.androidx.sqlite.ktx)
 }
 
 room {

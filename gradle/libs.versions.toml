@@ -1,5 +1,6 @@
 [versions]
 agp = "8.6.1"
+androidDatabaseSqlcipher = "4.5.4"
 coilCompose = "3.0.4"
 converterGson = "2.11.0"
 hiltAndroid = "2.55"
@@ -19,6 +20,8 @@ pagingRuntimeKtx = "3.3.5"
 retrofit = "2.11.0"
 robolectric = "4.14.1"
 room = "2.6.1"
+securityCrypto = "1.0.0"
+sqliteKtx = "2.4.0"
 webkit = "1.12.1"
 navigationCompose = "2.8.5"
 appcompat = "1.7.0"
@@ -26,12 +29,15 @@ material = "1.12.0"
 activity = "1.10.0"
 
 [libraries]
+android-database-sqlcipher = { module = "net.zetetic:android-database-sqlcipher", version.ref = "androidDatabaseSqlcipher" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingRuntimeKtx" }
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "room" }
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
+androidx-sqlite-ktx = { module = "androidx.sqlite:sqlite-ktx", version.ref = "sqliteKtx" }
 androidx-webkit = { module = "androidx.webkit:webkit", version.ref = "webkit" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilCompose" }
