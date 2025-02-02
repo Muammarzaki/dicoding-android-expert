@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution">
 
     <dist:module
@@ -12,7 +13,7 @@
         <dist:fusing dist:include="true" />
     </dist:module>
 
-    <application android:icon="@mipmap/ic_launcher_round">
+    <application tools:ignore="MissingApplicationIcon">
         <activity
             android:name=".FavoriteActivity"
             android:exported="false" />
