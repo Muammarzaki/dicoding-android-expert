@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   build:
-    executor: android/android
+    executor: android/android_machine
     steps:
       - checkout
       - restore_cache:
