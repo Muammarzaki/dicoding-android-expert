@@ -5,7 +5,10 @@ orbs:
 
 jobs:
   build:
-    executor: android/android_machine
+    executor:
+      name: android/android_machine
+      resource-class: large
+      tag: 2024.01.1
     steps:
       - checkout
       - restore_cache:
