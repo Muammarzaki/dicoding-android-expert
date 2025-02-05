@@ -52,7 +52,7 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     implementation(libs.okhttp)
     api(libs.androidx.room.ktx)
-    api(libs.room.runtime)
+    implementation(libs.room.runtime)
     api(libs.androidx.room.paging)
     api(libs.androidx.paging.compose)
     api(libs.androidx.paging.runtime.ktx)

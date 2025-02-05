@@ -62,13 +62,15 @@ object CoreModule {
     @Singleton
     fun provideDatabase(@ApplicationContext applicationContext: Context): Database {
         val passPhase = SQLiteDatabase.getBytes("arts".toCharArray())
+        val factory = SupportFactory(passPhase)
         return Room.databaseBuilder(
             applicationContext,
             Database::class.java,
             "ColArt.db"
-        ).openHelperFactory(
-            SupportFactory(passPhase)
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 
     @Provides
