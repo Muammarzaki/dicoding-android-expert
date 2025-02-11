@@ -43,6 +43,15 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildTypes {
+        all {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
 }
 
 dependencies {

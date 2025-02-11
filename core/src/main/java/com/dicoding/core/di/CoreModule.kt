@@ -30,7 +30,7 @@ object CoreModule {
     private fun provideCertificatePinning(): CertificatePinner {
         @Suppress("SpellCheckingInspection")
         return CertificatePinner.Builder()
-            .add("artic.edu", "sha256/30Da9/6LeLRQmIEAuVQfsVp2TRAJNrMH4hzW/vwC4Js=")
+            .add("api.artic.edu", "sha256/d4cTnFrtGMXQSJotggD5semE9VmAWH2sjBDAEkBDZc4=")
             .build()
     }
 
