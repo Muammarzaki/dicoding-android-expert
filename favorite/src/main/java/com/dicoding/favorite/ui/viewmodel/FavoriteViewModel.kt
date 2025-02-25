@@ -1,27 +1,28 @@
 package com.dicoding.favorite.ui.viewmodel
 
 import android.util.Log
-import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.dicoding.core.domain.ArtWork
 import com.dicoding.core.domain.IArtsUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("OPT_IN_USAGE")
 class FavoriteViewModel @Inject constructor(
     private val artsUseCase: IArtsUseCase
 ) : ViewModel() {
 
     val favoriteArts = artsUseCase.getFavoriteArts().cachedIn(viewModelScope)
-    val favoriteListState = LazyStaggeredGridState()
 
     private val _art = MutableStateFlow<ArtWork?>(null)
     val art = _art.asStateFlow()
@@ -54,16 +55,20 @@ class FavoriteViewModel @Inject constructor(
     }
 
     init {
-        viewModelScope.launch {
-            _art.collectLatest { art ->
-                art?.id?.let {
-                    artsUseCase.isFavorite(it).collectLatest { isFavorite ->
-                        _isFavorite.emit(isFavorite)
-                    }
-                }
+        _art
+            .filterNotNull()
+            .flatMapLatest { art ->
+                artsUseCase.isFavorite(art.id)
             }
-        }
+            .onEach { isFavorite ->
+                _isFavorite.value = isFavorite
+            }
+            .launchIn(viewModelScope)
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.cancel()
+    }
 
 }

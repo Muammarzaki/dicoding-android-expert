@@ -23,7 +23,7 @@ class FavoriteActivity : ComponentActivity() {
             FavoriteModuleDependencies::class.java
         )
         DaggerFavoriteComponent.builder()
-            .context(this)
+            .context(applicationContext)
             .appDependencies(
                 entryPoint
             )

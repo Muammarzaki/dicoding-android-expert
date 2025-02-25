@@ -2,6 +2,7 @@ package com.dicoding.favorite.ui.screen
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,16 +32,14 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun FavoriteScreen(
-    modifier: Modifier = Modifier,
     viewModel: FavoriteViewModel,
     onCardClick: (String, Boolean) -> Unit,
     moveToMain: () -> Unit
 ) {
     val arts = viewModel.favoriteArts.collectAsLazyPagingItems()
     FavoriteContent(
-        modifier = modifier,
         arts = arts,
-        listState = viewModel.favoriteListState,
+        listState = rememberLazyStaggeredGridState(),
         onCardClick = onCardClick,
         moveToMain = moveToMain
     )
@@ -49,7 +48,6 @@ fun FavoriteScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteContent(
-    modifier: Modifier = Modifier,
     arts: LazyPagingItems<ArtCard>,
     listState: LazyStaggeredGridState,
     onCardClick: (String, Boolean) -> Unit,

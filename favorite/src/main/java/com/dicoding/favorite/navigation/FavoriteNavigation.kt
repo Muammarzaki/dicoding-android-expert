@@ -22,7 +22,6 @@ fun FavoriteNavigation(
     NavHost(navController = navController, startDestination = Screen.Favorite.route) {
         composable(Screen.Favorite.route) {
             FavoriteScreen(
-                modifier = modifier,
                 viewModel = viewmodel,
                 onCardClick = { artId, isFavorite ->
                     navController.navigate(Screen.Detail.createRoute(artId, isFavorite))
@@ -35,12 +34,14 @@ fun FavoriteNavigation(
         composable(
             route = Screen.Detail.route,
             arguments = Screen.Detail.arguments
-        ) {
-            val artId = it.arguments?.getString("artId") ?: ""
+        ) { backStackEntry ->
+            val artId = backStackEntry.arguments?.getString("artId") ?: ""
+
             LaunchedEffect(artId) {
                 viewmodel.clearArt()
                 viewmodel.getArtWork(artId)
             }
+
             DetailScreen(
                 modifier = modifier,
                 viewModel = viewmodel,
@@ -59,5 +60,4 @@ fun FavoriteNavigation(
             }
         }
     }
-
 }

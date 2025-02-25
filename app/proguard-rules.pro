@@ -6,3 +6,5 @@
 
 # Gunakan ini untuk mengganti nama file
 -renamesourcefileattribute SourceFile
+
+-keep class javax.lang.model.** { *; }
