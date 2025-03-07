@@ -29,3 +29,5 @@
 -keep class com.dicoding.core.** {*;}
 
 -keep class com.dicoding.core.ExtensionsKt { *; }
+
+-dontwarn com.dicoding.core.ExtensionsKt
