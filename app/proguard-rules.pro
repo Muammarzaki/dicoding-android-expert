@@ -31,3 +31,18 @@
 -keep class com.dicoding.core.ExtensionsKt { *; }
 
 -dontwarn com.dicoding.core.ExtensionsKt
+
+
+# Keep Kotlin Coroutines
+-keep class kotlinx.coroutines.** { *; }
+-keep class kotlin.coroutines.** { *; }
+-keep class kotlin.coroutines.intrinsics.** { *; }
+-keep class kotlin.ResultKt { *; }
+-keep class kotlin.Result { *; }
+-keep class kotlin.Metadata { *; }
+-keep class kotlin.jvm.internal.** { *; }
+-keep class kotlin.coroutines.jvm.internal.** { *; }
+
+# Keep Compose functions
+-keep class androidx.compose.** { *; }
+-keep class androidx.lifecycle.** { *; }
