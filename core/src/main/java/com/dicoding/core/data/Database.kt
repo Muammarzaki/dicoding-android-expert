@@ -51,6 +51,9 @@ interface ArtWorkDao {
 
     @Query("DELETE FROM favorite_art_data WHERE id = :artId")
     fun deleteFavorite(artId: String): Int
+
+    @Query("SELECT count(*) FROM simple_art_data")
+    fun count(): Int
 }
 
 @Dao
