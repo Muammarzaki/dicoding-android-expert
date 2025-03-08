@@ -1,3 +1,7 @@
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
+
 # Keep Hilt-related classes
 -keep class dagger.hilt.** { *; }
 -keep class androidx.hilt.** { *; }
@@ -22,3 +26,12 @@
 -dontwarn java.lang.invoke.StringConcatFactory
 
 -keep class com.dicoding.core.domain.** {*;}
+
+-keep class com.google.gson.** { *; }
+
+-keep class * extends com.google.gson.TypeAdapter
+-keep class * implements com.google.gson.TypeAdapterFactory
+
+-keep class com.dicoding.core.data.** {*;}
+
+# tidak ada yang di obfuss :>
