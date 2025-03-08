@@ -32,6 +32,6 @@
 -keep class * extends com.google.gson.TypeAdapter
 -keep class * implements com.google.gson.TypeAdapterFactory
 
--keep class com.dicoding.core.data.** {*;}
 
+-keep class com.dicoding.core.** {*;}
 # tidak ada yang di obfuss :>
